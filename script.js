@@ -91,29 +91,29 @@ document.addEventListener("keyup", (event) => {
 
 function movePlayer() {
 
-    if((keys["w"] || keys["arrowup"]) && playerY > 0){
+    if ((keys["w"] || keys["arrowup"]) && playerY > 0) {
 
-    playerY -= speed;
+        playerY -= speed;
 
-}
+    }
 
-if((keys["s"] || keys["arrowdown"]) && playerY < window.innerHeight - 70){
+    if ((keys["s"] || keys["arrowdown"]) && playerY < window.innerHeight - 70) {
 
-    playerY += speed;
+        playerY += speed;
 
-}
+    }
 
-if((keys["a"] || keys["arrowleft"]) && playerX > 0){
+    if ((keys["a"] || keys["arrowleft"]) && playerX > 0) {
 
-    playerX -= speed;
+        playerX -= speed;
 
-}
+    }
 
-if((keys["d"] || keys["arrowright"]) && playerX < window.innerWidth - 70){
+    if ((keys["d"] || keys["arrowright"]) && playerX < window.innerWidth - 70) {
 
-    playerX += speed;
+        playerX += speed;
 
-}
+    }
 
     player.style.left = playerX + "px";
 
@@ -189,7 +189,7 @@ function createBullet() {
 
         let bulletLeft = parseInt(bullet.style.left);
 
-        bullet.style.left = bulletLeft + 12 + "px";
+        bullet.style.left = bulletLeft + 18 + "px";
 
         let enemies =
             document.querySelectorAll(".enemy");
@@ -213,28 +213,18 @@ function createBullet() {
 
                 bullet.remove();
 
-enemy.style.transform = "scale(2)";
+                setTimeout(() => {
 
-enemy.style.opacity = "0";
+                    enemy.remove();
 
-enemy.style.transition = ".2s";
+                }, 180);
 
-explosionSound.currentTime = 0;
+                score += 10;
 
-explosionSound.play();
+                scoreText.innerHTML =
+                    "Score : " + score;
 
-setTimeout(()=>{
-
-    enemy.remove();
-
-},180);
-
-score += 10;
-
-scoreText.innerHTML =
-"Score : " + score;
-
-clearInterval(bulletMove);
+                clearInterval(bulletMove);
 
             }
 
@@ -295,22 +285,29 @@ function createEnemy() {
 
         ) {
 
+            clearInterval(enemyMove);
+
             enemy.remove();
 
-            health = Math.max(0, health - 10);
+            health -= 10;
 
-            healthText.innerHTML =
-                "Health : " + health;
+            if (health < 0) {
 
-                player.style.filter = "brightness(2.5)";
+                health = 0;
 
-setTimeout(()=>{
+            }
 
-    player.style.filter = "drop-shadow(0 0 12px cyan)";
+            healthText.innerHTML = "❤️ Health : " + health;
 
-},120);
+            player.style.filter = "brightness(2.5)";
 
-            clearInterval(enemyMove);
+            setTimeout(() => {
+
+                player.style.filter = "drop-shadow(0 0 12px cyan)";
+
+            }, 120);
+
+            return;
 
         }
 
