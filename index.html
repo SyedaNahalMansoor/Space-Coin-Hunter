@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Space Coin Hunter</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Start Screen -->
+    <div id="startScreen">
+      <div class="stars"></div>
+
+      <h1>🚀 Space Coin Hunter</h1>
+
+      <button id="startBtn">▶ Start Game</button>
+
+      <button id="instructionBtn">📜 Instructions</button>
+    </div>
+
+    <!-- Instructions Screen -->
+    <div id="instructionScreen">
+      <h1>Instructions</h1>
+
+      <div class="instructionBox">
+        <p>⬆️ W = Move Up</p>
+        <p>⬇️ S = Move Down</p>
+        <p>⬅️ A = Move Left</p>
+        <p>➡️ D = Move Right</p>
+        <p>🔫 SPACE = Shoot</p>
+
+        <p>🪙 Collect Coins</p>
+        <p>👾 Destroy Enemies</p>
+        <p>🏆 Complete All Levels</p>
+      </div>
+
+      <button id="backBtn">Back</button>
+    </div>
+
+    <!-- Game Area -->
+    <div id="gameArea">
+      <div id="hud">
+        <div class="box" id="score">🏆 Score : 0</div>
+
+        <div class="box" id="health">❤️ Health : 100</div>
+
+        <div class="box" id="level">🚀 Level : 1</div>
+      </div>
+
+      <div id="player"></div>
+    </div>
+
+    <div id="gameOverScreen">
+      <div class="gameStars"></div>
+
+      <h1>💀 GAME OVER 💀</h1>
+
+      <h2 id="finalScore"></h2>
+
+      <button id="restartBtn">Restart</button>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

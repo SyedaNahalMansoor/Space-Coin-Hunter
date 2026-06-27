@@ -1,0 +1,461 @@
+@import url("https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow: hidden;
+  background: radial-gradient(circle, #1b2735, #090a0f, #000);
+  font-family: Arial, sans-serif;
+  user-select: none;
+}
+
+/* START SCREEN */
+
+#startScreen {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at top, #2b1f63, #0b1026 40%, #000 90%);
+  overflow: hidden;
+  position: relative;
+}
+
+#startScreen h1 {
+  font-size: 65px;
+  color: white;
+  font-weight: bold;
+  z-index: 2;
+  text-shadow:
+    0 0 15px #00e5ff,
+    0 0 30px #00e5ff,
+    0 0 60px #00e5ff;
+  margin-bottom: 40px;
+  animation: float 2s ease-in-out infinite;
+}
+
+#startScreen button {
+  width: 260px;
+  height: 65px;
+  margin: 15px;
+  font-size: 22px;
+  color: white;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid #00e5ff;
+  border-radius: 18px;
+  cursor: pointer;
+  transition: 0.4s;
+  backdrop-filter: blur(8px);
+  z-index: 2;
+}
+
+#startScreen button:hover {
+  transform: scale(1.08);
+  background: #00e5ff;
+  color: black;
+  box-shadow:
+    0 0 15px #00e5ff,
+    0 0 35px #00e5ff,
+    0 0 60px #00e5ff;
+}
+
+.stars {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(white 1px, transparent 1px),
+    radial-gradient(white 1px, transparent 1px),
+    radial-gradient(#8ec5ff 1px, transparent 1px);
+  background-size:
+    90px 90px,
+    130px 130px,
+    180px 180px;
+  opacity: 0.8;
+  animation: starsMove 50s linear infinite;
+}
+
+/* INSTRUCTION SCREEN */
+
+#instructionScreen {
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  background: radial-gradient(circle at center, #1b2735, #090a0f, #000);
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.instructionBox {
+  width: 380px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid #00e5ff;
+  border-radius: 20px;
+  padding: 25px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
+  animation: popup 0.6s ease;
+}
+
+#instructionScreen h1 {
+  font-size: 55px;
+  color: #00e5ff;
+  text-shadow:
+    0 0 10px #00e5ff,
+    0 0 20px #00e5ff,
+    0 0 40px #00e5ff;
+  margin-bottom: 20px;
+}
+
+.instructionBox p {
+  font-size: 22px;
+  margin: 15px 0;
+  transition: 0.3s;
+  cursor: default;
+}
+
+.instructionBox p:hover {
+  color: #00e5ff;
+  transform: translateX(10px);
+}
+
+#backBtn {
+  width: 260px;
+  height: 65px;
+  margin: 15px;
+  font-size: 22px;
+  color: white;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid #00e5ff;
+  border-radius: 18px;
+  cursor: pointer;
+  transition: 0.4s;
+  backdrop-filter: blur(8px);
+  z-index: 2;
+}
+
+#backBtn:hover {
+  transform: scale(1.08);
+  background: #00e5ff;
+  color: black;
+  box-shadow:
+    0 0 15px #00e5ff,
+    0 0 35px #00e5ff,
+    0 0 60px #00e5ff;
+}
+
+#instructionScreen button {
+  padding: 12px 25px;
+  cursor: pointer;
+  background-color: transparent;
+  color: blue;
+  border: 3px solid white;
+  font-weight: bold;
+  border-radius: 10px;
+  font-size: 17px;
+  letter-spacing: 1px;
+}
+
+/* GAME AREA */
+
+#gameArea {
+  width: 100vw;
+  height: 100vh;
+  /* background:url("https://i.imgur.com/o7sR6vA.jpg"); */
+  background-size: cover;
+  position: relative;
+  display: none;
+  overflow: hidden;
+  font-family: "Fjalla One", sans-serif;
+}
+
+#score {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: white;
+  font-size: 24px;
+}
+
+#health {
+  position: absolute;
+  top: 10px;
+  left: 180px;
+  color: white;
+  font-size: 24px;
+}
+
+#level {
+  position: absolute;
+  top: 10px;
+  left: 380px;
+  color: white;
+  font-size: 24px;
+}
+
+/* PLAYER */
+
+#player {
+  width: 90px;
+  height: 90px;
+  position: absolute;
+  left: 100px;
+  top: 300px;
+  background-image: url("/images/fighter.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: drop-shadow(0 0 12px cyan);
+}
+
+.bullet {
+  width: 30px;
+  height: 7px;
+  background: linear-gradient(90deg, yellow, orange, red);
+  height: 8px;
+  border-radius: 20px;
+  position: absolute;
+  border-radius: 10px;
+}
+
+.enemy {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  background-image: url("/images/enemy.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: enemySpawn 0.3s;
+  transform-origin: center;
+  /* filter: */
+  /* drop-shadow(0 0 12px red); */
+}
+
+#gameOverScreen {
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at center, #2b1f63, #111, #000);
+  overflow: hidden;
+  position: relative;
+  animation: popup 0.7s;
+}
+
+.gameStars {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(white 1px, transparent 1px),
+    radial-gradient(#00e5ff 1px, transparent 1px),
+    radial-gradient(#ff00ff 1px, transparent 1px);
+  background-size:
+    120px 120px,
+    170px 170px,
+    220px 220px;
+  animation: starsAnimation 40s linear infinite;
+  opacity: 0.7;
+}
+
+#gameOverScreen h1 {
+  font-size: 70px;
+  color: #ff2d55;
+  z-index: 2;
+  text-shadow: 0 0 60px red;
+  animation: shake 1s infinite;
+}
+
+#gameOverScreen button {
+  padding: 12px 25px;
+  cursor: pointer;
+  background-color: transparent;
+  color: blue;
+  border: 3px solid white;
+  font-weight: bold;
+  border-radius: 10px;
+  font-size: 17px;
+  letter-spacing: 1px;
+}
+
+#hud {
+  #hud{
+    position:absolute;
+    top:20px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:25px;
+    z-index:999;
+}
+}
+
+.box {
+  .box{
+    width:190px;
+    height:60px;
+    flex-shrink:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:18px;
+    border:2px solid #00e5ff;
+    background:rgba(255,255,255,.08);
+    box-shadow:0 0 10px rgba(0,229,255,.5);
+}
+}
+
+#finalScore {
+  font-size: 38px;
+  color: white;
+  margin: 25px;
+  z-index: 2;
+  text-shadow: 0 0 15px cyan;
+}
+
+#restartBtn {
+  width: 230px;
+  height: 65px;
+  border: none;
+  border-radius: 18px;
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.4s;
+  z-index: 2;
+}
+
+#restartBtn:hover {
+  transform: scale(1.08);
+  box-shadow:
+    0 0 25px #00c6ff,
+    0 0 50px #0072ff;
+}
+
+.coin {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  background-image: url("/images/coin.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: coinRotate 1s linear infinite;
+}
+
+@keyframes popup {
+  from {
+    transform: scale(0.5);
+
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+
+    opacity: 1;
+  }
+}
+
+@keyframes starsMove {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(400px);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes starsAnimation {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(400px);
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-5px);
+  }
+
+  50% {
+    transform: translateX(5px);
+  }
+
+  75% {
+    transform: translateX(-5px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes popup {
+  from {
+    opacity: 0;
+
+    transform: scale(0.4);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: scale(1);
+  }
+}
+
+@keyframes coinRotate {
+  50% {
+    transform: scale(1.25);
+  }
+}
+
+@keyframes enemySpawn {
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
